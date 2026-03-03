@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Author Portfolio | premium template</title>
+  <!-- Google Font: Inter & Fallback -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free) for subtle icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* -------------------- RESET & VARIABLES -------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px; /* offset for sticky header */
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+      background-color: #fbfcfd;
+      color: #1e2b35;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    /* soft neutral palette */
+    :root {
+      --bg-light: #fbfcfd;
+      --surface-white: #ffffff;
+      --soft-gray: #f2f5f8;
+      --border-light: #e2e8f0;
+      --text-primary: #1e2b35;
+      --text-secondary: #4a5a67;
+      --accent: #2c6e8f;        /* calm, sophisticated blue-teal */
+      --accent-soft: #d9e9f2;
+      --shadow-sm: 0 8px 20px -8px rgba(0,20,30,0.08), 0 2px 6px rgba(0,0,0,0.02);
+      --shadow-md: 0 20px 30px -15px rgba(0,30,40,0.12), 0 8px 15px -10px rgba(0,20,30,0.05);
+      --shadow-hover: 0 30px 40px -20px rgba(0,45,60,0.18), 0 10px 25px -10px rgba(0,30,40,0.1);
+      --transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+      --border-radius-card: 1.2rem;
+      --border-radius-element: 0.9rem;
+    }
+
+    /* -------------------- GLOBAL STYLES -------------------- */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 5rem 0;
+      position: relative;
+    }
+
+    /* section headings */
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 3rem;
+      border-left: 5px solid var(--accent);
+      padding-left: 1.8rem;
+      line-height: 1.2;
+    }
+
+    .section-title span {
+      font-weight: 300;
+      color: var(--text-secondary);
+      display: block;
+      font-size: 1.1rem;
+      letter-spacing: 0.4px;
+      margin-top: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    /* buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background-color: transparent;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 2.4rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      background-color: rgba(44, 110, 143, 0.02);
+      backdrop-filter: blur(2px);
+    }
+
+    .btn i {
+      font-size: 0.9rem;
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 12px 22px -12px rgba(44,110,143,0.35);
+      transform: translateY(-3px);
+    }
+
+    .btn:hover i {
+      transform: translateX(5px);
+    }
+
+    /* reveal animation base */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s cubic-bezier(0.15, 0.85, 0.35, 1), transform 0.9s cubic-bezier(0.15, 0.85, 0.35, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* -------------------- STICKY HEADER -------------------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      background: rgba(251, 252, 253, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+      z-index: 50;
+      padding: 0.8rem 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo a {
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+    }
+
+    .logo a:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    .main-nav ul {
+      display: flex;
+      gap: 2.8rem;
+      list-style: none;
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      font-weight: 450;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      transition: var(--transition);
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid transparent;
+    }
+
+    .main-nav a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* mobile nav */
+    @media (max-width: 640px) {
+      .main-nav ul {
+        gap: 1.2rem;
+      }
+      .header-inner {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* -------------------- HERO SECTION -------------------- */
+    .hero {
+      padding: 4rem 0 5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .hero-content h1 {
+      font-size: 3.8rem;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .hero-name {
+      color: var(--accent);
+      font-weight: 400;
+      border-bottom: 2px solid var(--accent-soft);
+      display: inline-block;
+      padding-bottom: 0.2rem;
+    }
+
+    .hero-latest {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin: 1.5rem 0 2rem;
+      background: var(--soft-gray);
+      padding: 0.7rem 1.8rem;
+      border-radius: 3rem;
+      display: inline-block;
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--border-light);
+    }
+
+    .hero-image {
+      background: linear-gradient(145deg, #e0eef5, #cbdbe6);
+      border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;
+      box-shadow: var(--shadow-md);
+      aspect-ratio: 1 / 1.1;
+      max-width: 380px;
+      margin-left: auto;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="300" height="300"><circle cx="100" cy="100" r="80" fill="%23d4e3ed" /><circle cx="80" cy="80" r="15" fill="%23ffffff80" /><circle cx="135" cy="95" r="10" fill="%23ffffff60" /><path d="M70 130 Q100 160, 135 130" stroke="%23ffffffb0" stroke-width="4" fill="none" stroke-linecap="round" /></svg>');
+      background-size: cover;
+      background-position: center;
+      transition: var(--transition);
+    }
+
+    .hero-image:hover {
+      transform: scale(1.02) rotate(1deg);
+    }
+
+    @media (max-width: 800px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-image {
+        margin: 0 auto;
+        width: 280px;
+      }
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+    }
+
+    /* -------------------- BIO SECTION -------------------- */
+    .bio {
+      background-color: var(--soft-gray);
+      border-radius: 3rem 3rem 0 0;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+    }
+
+    .bio-card {
+      background: var(--surface-white);
+      padding: 3rem;
+      border-radius: var(--border-radius-card);
+      box-shadow: var(--shadow-sm);
+      max-width: 900px;
+      margin: 0 auto;
+      border: 1px solid var(--border-light);
+    }
+
+    .bio-text {
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      font-weight: 350;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .bio-signature {
+      font-style: italic;
+      color: var(--text-secondary);
+      border-top: 2px dashed var(--border-light);
+      padding-top: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* -------------------- FEATURED BOOKS -------------------- */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .book-card {
+      background: var(--surface-white);
+      border-radius: var(--border-radius-card);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(0);
+    }
+
+    .book-card:hover {
+      transform: translateY(-16px) scale(1.02);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-soft);
+    }
+
+    .book-cover {
+      height: 240px;
+      background: linear-gradient(145deg, #d8e5ed, #c2d3df);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      font-weight: 300;
+      transition: var(--transition);
+      background-image: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 5%, transparent 30%);
+    }
+
+    .book-card:nth-child(2) .book-cover {
+      background: linear-gradient(145deg, #cbdde8, #b4cbda);
+    }
+    .book-card:nth-child(3) .book-cover {
+      background: linear-gradient(145deg, #d4e2ed, #bed2e2);
+    }
+
+    .book-overlay {
+      position: absolute;
+      bottom: 12px;
+      left: 0;
+      right: 0;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      width: fit-content;
+      margin: 0 auto;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      border: 1px solid rgba(255,255,255,0.9);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: var(--transition);
+    }
+
+    .book-card:hover .book-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .book-info {
+      padding: 2rem 1.8rem 1.8rem;
+    }
+
+    .book-title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .book-meta {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+      border-bottom: 1px dashed var(--border-light);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .book-description {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 800px) {
+      .books-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 540px) {
+      .books-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* -------------------- TESTIMONIALS -------------------- */
+    .testimonials {
+      background: var(--surface-white);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: var(--soft-gray);
+      border-radius: var(--border-radius-card);
+      padding: 2rem 2rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid var(--border-light);
+    }
+
+    .testimonial-card:hover {
+      transform: scale(1.02);
+      background: white;
+    }
+
+    .testimonial-quote i {
+      color: var(--accent);
+      font-size: 1.6rem;
+      opacity: 0.5;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-text {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text-primary);
+      margin-bottom: 1.8rem;
+    }
+
+    .testimonial-author {
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border-light);
+      padding-top: 1rem;
+    }
+
+    @media (max-width: 800px) {
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 540px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* -------------------- NEWSLETTER -------------------- */
+    .newsletter-card {
+      background: var(--soft-gray);
+      border-radius: 3rem;
+      padding: 3.5rem 3rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .newsletter-card h3 {
+      font-size: 2rem;
+      font-weight: 450;
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-card p {
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border: 1px solid var(--border-light);
+      border-radius: 3rem;
+      font-size: 1rem;
+      background: white;
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .newsletter-form input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(44,110,143,0.15);
+    }
+
+    .newsletter-form button {
+      background: var(--accent);
+      border: none;
+      color: white;
+      padding: 0 2.2rem;
+      border-radius: 3rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--accent);
+    }
+
+    .newsletter-form button:hover {
+      background: #1f5673;
+      border-color: #1f5673;
+      transform: scale(1.05);
+      box-shadow: var(--shadow-md);
+    }
+
+    @media (max-width: 600px) {
+      .newsletter-form {
+        flex-direction: column;
+      }
+    }
+
+    /* -------------------- CONTACT SECTION -------------------- */
+    .contact-grid {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      background: var(--surface-white);
+      padding: 1.2rem 2.5rem;
+      border-radius: 4rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      transition: var(--transition);
+    }
+
+    .contact-item:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    .contact-item i {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+
+    .contact-item span {
+      font-size: 1.2rem;
+      color: var(--text-primary);
+    }
+
+    /* -------------------- FOOTER / TRADEMARK -------------------- */
+    .site-footer {
+      border-top: 1px solid var(--border-light);
+      padding: 2rem 0;
+      margin-top: 2rem;
+    }
+
+    .footer-trademark {
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+
+    .footer-trademark a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      border-bottom: 1px dotted var(--border-light);
+      font-weight: 450;
+    }
+
+    .footer-trademark a:hover {
+      opacity: 1;
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* -------------------- RESPONSIVE FINE-TUNING -------------------- */
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1.2rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* placeholder styling */
+    .placeholder-highlight {
+      background: rgba(44,110,143,0.05);
+      padding: 0.1rem 0.3rem;
+      border-radius: 0.3rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <!-- STICKY HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo"><a href="#">Your Name Here</a></div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#bio">Bio</a></li>
+          <li><a href="#books">Books</a></li>
+          <li><a href="#testimonials">Praise</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <h1>Write <span class="hero-name">Your Name Here</span><br>craft stories that matter</h1>
+          <div class="hero-latest"><i class="fas fa-star" style="margin-right: 10px; color: var(--accent);"></i> Latest release: <strong>“Your Book Title Here”</strong></div>
+          <p style="color: var(--text-secondary); max-width: 500px; margin-bottom: 2.2rem;">Placeholder for a compelling tagline that introduces your voice. Replace with your own words.</p>
+          <a href="#" class="btn">Explore books <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="hero-image reveal"></div>
+      </div>
+    </section>
+
+    <!-- BIO SECTION -->
+    <section id="bio" class="bio">
+      <div class="container">
+        <div class="bio-card reveal">
+          <h2 class="section-title">About <span>the author</span></h2>
+          <div class="bio-text">
+            “Your Bio Here. This is a placeholder for a thoughtful, engaging biography. It should reflect your journey, your passion for writing, and the themes you explore. Replace this text with your own story.”
+          </div>
+          <div class="bio-signature">— Your Name Here</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED BOOKS -->
+    <section id="books">
+      <div class="container">
+        <h2 class="section-title">Featured books <span>your latest releases</span></h2>
+        <div class="books-grid">
+          <!-- card 1 -->
+          <div class="book-card reveal">
+            <div class="book-cover">
+              <span class="book-overlay"><i class="fas fa-book-open"></i> Your Latest Release</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">Your Book Title Here</h3>
+              <div class="book-meta">1st edition · 2025</div>
+              <p class="book-description">Placeholder description: a gripping tale of mystery and depth. Customize this.</p>
+            </div>
+          </div>
+          <!-- card 2 -->
+          <div class="book-card reveal">
+            <div class="book-cover">
+              <span class="book-overlay"><i class="fas fa-star"></i> Award winner</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">Your Book Title Here</h3>
+              <div class="book-meta">paperback · 2023</div>
+              <p class="book-description">Another placeholder for an acclaimed novel. Replace with real description.</p>
+            </div>
+          </div>
+          <!-- card 3 -->
+          <div class="book-card reveal">
+            <div class="book-cover">
+              <span class="book-overlay"><i class="fas fa-heart"></i> reader favorite</span>
+            </div>
+            <div class="book-info">
+              <h3 class="book-title">Your Book Title Here</h3>
+              <div class="book-meta">revised edition</div>
+              <p class="book-description">Third placeholder: the story that captivated thousands. Swap with actual copy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+        <h2 class="section-title">Praise <span>what readers say</span></h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card reveal">
+            <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+            <p class="testimonial-text">“A magnificent voice. This book stayed with me long after the last page. Placeholder testimonial – replace with a real quote.”</p>
+            <div class="testimonial-author">— Reviewer Name, Publication</div>
+          </div>
+          <div class="testimonial-card reveal">
+            <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+            <p class="testimonial-text">“Absolutely stunning prose. The author weaves words like magic. Another placeholder – make it your own.”</p>
+            <div class="testimonial-author">— Famous Author, Bestseller</div>
+          </div>
+          <div class="testimonial-card reveal">
+            <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+            <p class="testimonial-text">“Haunting, beautiful, unforgettable. A true masterpiece. Use this space to highlight critical acclaim.”</p>
+            <div class="testimonial-author">— The Literary Review</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER SIGNUP -->
+    <section>
+      <div class="container">
+        <div class="newsletter-card reveal">
+          <h3>Notes from the author</h3>
+          <p>Subscribe for updates, essays, and your latest release news.</p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="your.email@example.com" aria-label="Email address">
+            <button type="button" class="btn" style="border: none; background: var(--accent); color: white;">Subscribe</button>
+          </div>
+          <p style="margin-top: 1.5rem; font-size: 0.8rem; opacity: 0.6;">placeholder: preview of newsletter</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" style="padding-top: 2rem;">
+      <div class="container">
+        <h2 class="section-title">Connect <span>reach out</span></h2>
+        <div class="contact-grid">
+          <div class="contact-item reveal">
+            <i class="fas fa-envelope"></i>
+            <span>your.email@example.com</span>
+          </div>
+          <div class="contact-item reveal">
+            <i class="fas fa-location-dot"></i>
+            <span>New York / London (placeholder)</span>
+          </div>
+          <div class="contact-item reveal">
+            <i class="fab fa-twitter"></i>
+            <span>@yourhandle</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER with TRADEMARK (bottom-left) -->
+  <footer class="site-footer">
+    <div class="container footer-trademark" style="display: flex; justify-content: flex-start;">
+      <a href="https://pixelforgebusiness.github.io" target="_blank" rel="noopener noreferrer">PixelForge™ | Make It Yours</a>
+    </div>
+    <!-- small note: all placeholders clearly marked -->
+  </footer>
+
+  <!-- VANILLA JAVASCRIPT: Intersection Observer + smooth micro-interactions -->
+  <script>
+    (function() {
+      // REVEAL ON SCROLL (Intersection Observer)
+      const revealElements = document.querySelectorAll('.reveal');
+      
+      if (revealElements.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              // optional: unobserve after reveal to reduce load
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' }); // subtle offset
+
+        revealElements.forEach(el => observer.observe(el));
+      }
+
+      // additional micro-interaction: smooth hover on cards (already in CSS)
+      // placeholder alert on subscribe button (just for demo)
+      const subscribeBtn = document.querySelector('.newsletter-form button');
+      if (subscribeBtn) {
+        subscribeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          alert('✨ Thanks for subscribing! (This is a demo placeholder.)');
+        });
+      }
+
+      // optional: add active link highlight while scrolling (purely aesthetic)
+      // we can keep it simple, but I'll add a small scrollspy for nav polish
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.main-nav a');
+
+      function updateActiveLink() {
+        let scrollPos = window.scrollY + 100; // offset header
+        sections.forEach(section => {
+          const top = section.offsetTop;
+          const bottom = top + section.offsetHeight;
+          const id = section.getAttribute('id');
+          if (scrollPos >= top && scrollPos < bottom) {
+            navLinks.forEach(link => {
+              link.style.color = 'var(--text-secondary)';
+              link.style.borderBottomColor = 'transparent';
+              if (link.getAttribute('href') === '#' + id) {
+                link.style.color = 'var(--accent)';
+                link.style.borderBottomColor = 'var(--accent)';
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveLink);
+      updateActiveLink(); // on load
+    })();
+  </script>
+
+  <!-- extra placeholder markers (visible cues for customization) -->
+  <div style="display: none;">All placeholders: Your Name Here, Your Book Title Here, Your Bio Here, Your Latest Release Here, etc.</div>
+</body>
+</html>
